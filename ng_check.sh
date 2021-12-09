@@ -7,7 +7,7 @@
   
 
  
-  backup(){ cp -r $NGINX_HOME $NGINX_BAK_DIR 
+  backup(){ cp -r $NGINX_HOME ${NGINX_BAK_DIR}_${TS}
         }
 
   check(){     
