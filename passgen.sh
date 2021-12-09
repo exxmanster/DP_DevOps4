@@ -60,3 +60,4 @@
 ### Sort for randomly mixing all the stuff, head is cut it out number of reqested chars(random in case flag is empty flag and awk is removing our seed)
 pass | sort -R | head -${LENGTH} | awk '{printf "%s",$1}'
  echo " "
+                                                                     
