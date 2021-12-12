@@ -1,4 +1,4 @@
-        #!/bin/sh
+re        #!/bin/sh
  
  TS=`date "+%Y-%m-%d_%H:%M:%S"`
  NG_START="systemctl start nginx"
