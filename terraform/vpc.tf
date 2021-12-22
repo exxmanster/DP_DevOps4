@@ -44,7 +44,7 @@ resource "aws_nat_gateway" "gw-NAT-1b" {
 resource "aws_subnet" "private1" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = "10.0.1.0/24"
-  availability_zone = "us-west-1a"
+  availability_zone = "eu-central-1a"
   tags = {
     Name = "privat1"
   }
@@ -53,7 +53,7 @@ resource "aws_subnet" "private1" {
 resource "aws_subnet" "private2" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = "10.0.2.0/24"
-  availability_zone = "us-west-1b"
+  availability_zone = "eu-central-1b"
   tags = {
     Name = "privat2"
 
@@ -64,7 +64,7 @@ resource "aws_subnet" "private2" {
 resource "aws_subnet" "public1" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = "10.0.100.0/24"
-  availability_zone = "us-west-1a"
+  availability_zone = "eu-central-1a"
   tags = {
     Name = "public1"
 
@@ -74,7 +74,7 @@ resource "aws_subnet" "public1" {
 resource "aws_subnet" "public2" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = "10.0.200.0/24"
-  availability_zone = "us-west-1b"
+  availability_zone = "eu-central-1b"
   tags = {
     Name = "public2"
 
@@ -159,7 +159,7 @@ resource "aws_security_group" "allow_http" {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = [aws_vpc.main.cidr_block]
   }
 
   tags = {
@@ -217,3 +217,29 @@ resource "aws_security_group" "allow_ssh" {
     Name = "allow_ssh"
   }
 }
+
+resource "aws_security_group" "alb_sg" {
+  name        = "ELBv2 Security group"
+  description = "Allow all traffic to LB"
+  vpc_id      = aws_vpc.main.id
+
+  ingress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "alb_sg"
+  }
+}
+
+
