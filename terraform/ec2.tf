@@ -5,7 +5,7 @@ resource "aws_instance" "web1" {
   subnet_id = aws_subnet.private1.id
   key_name = aws_key_pair.ssh-key.key_name
   iam_instance_profile = "SSMRole"
-  vpc_security_group_ids = [aws_security_group.allow_http.id]
+  vpc_security_group_ids = [aws_security_group.allow_http.id, aws_security_group.allow_ssh.id]
   user_data = file("nginx-userdata.sh")
 
   tags = {
@@ -18,7 +18,7 @@ resource "aws_instance" "web2" {
   subnet_id = aws_subnet.private2.id
   key_name = aws_key_pair.ssh-key.key_name
   iam_instance_profile = "SSMRole"
-  vpc_security_group_ids = [aws_security_group.allow_http.id]
+  vpc_security_group_ids = [aws_security_group.allow_http.id, aws_security_group.allow_ssh.id]
   user_data = file("nginx-userdata.sh")
   tags = {
     Name = "Web 2"
@@ -31,7 +31,7 @@ resource "aws_instance" "db1" {
   subnet_id = aws_subnet.private1.id
   key_name = aws_key_pair.ssh-key.key_name
   iam_instance_profile = "SSMRole"
-  vpc_security_group_ids = [aws_security_group.allow_http.id]
+  vpc_security_group_ids = [aws_security_group.allow_http.id, aws_security_group.allow_ssh.id]
   user_data = file("nginx-db-userdata.sh")
   tags = {
     Name = "db1"
@@ -44,7 +44,7 @@ resource "aws_instance" "db2" {
   subnet_id = aws_subnet.private2.id
   key_name = aws_key_pair.ssh-key.key_name
   iam_instance_profile = "SSMRole"
-  vpc_security_group_ids = [aws_security_group.allow_http.id]
+  vpc_security_group_ids = [aws_security_group.allow_http.id, aws_security_group.allow_ssh.id]
   user_data = file("nginx-db-userdata.sh")
   tags = {
     Name = "db2"
@@ -58,7 +58,7 @@ resource "aws_instance" "bastion" {
   key_name = aws_key_pair.ssh-key.key_name
   iam_instance_profile = "SSMRole"
   vpc_security_group_ids = [aws_security_group.allow_http.id, aws_security_group.allow_ssh.id]
-  
+  user_data = ""
   tags = {
     Name = "bastion"
    }
