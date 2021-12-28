@@ -15,5 +15,6 @@ find /usr/share/nginx -type f -exec sudo chmod 0664 {} \;
 cd /usr/share/nginx/html && wget https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.tar.gz && 
 mkdir phpMyAdmin && tar -xvzf phpMyAdmin-latest-all-languages.tar.gz -C phpMyAdmin --strip-components 1 && 
 rm phpMyAdmin-latest-all-languages.tar.gz
+mysql -u root -e "SET PASSWORD FOR root@localhost = PASSWORD('mypassword')";
 sleep 3
 sudo systemctl restart mariadb nginx php-fpm && sudo systemctl enable mariadb nginx
