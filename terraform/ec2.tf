@@ -58,7 +58,8 @@ resource "aws_instance" "bastion" {
   key_name = aws_key_pair.ssh-key-to-bastion.key_name
   iam_instance_profile = "SSMRole"
   vpc_security_group_ids = [aws_security_group.allow_http.id, aws_security_group.allow_ssh.id]
-  
+   
+
   provisioner "file" {
     source = "bastion_id"
     destination = "/home/ec2-user/.ssh/id_rsa"
@@ -69,6 +70,7 @@ resource "aws_instance" "bastion" {
       type = "ssh"
       user = "ec2-user"
       host = "${aws_instance.bastion.public_ip}"
+     
   }
 
 provisioner "remote-exec" {    
@@ -76,8 +78,6 @@ provisioner "remote-exec" {
     "sudo chmod 600 /home/ec2-user/.ssh/id_rsa",
     "sudo yum update -y && sudo yum install -y python3-pip && pip3 install ansible"
   ]
-
-
 }
   tags = {
     Name = "bastion"
