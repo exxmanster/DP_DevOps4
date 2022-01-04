@@ -65,20 +65,10 @@ resource "aws_alb_listener" "web" {
   }
 }
 
-resource "aws_alb_listener" "db" {
-  load_balancer_arn = aws_alb.main.arn
-  port              = "8080"
-  protocol          = "HTTP"
-  
-  default_action {
-    type             = "forward"
-    target_group_arn = aws_alb_target_group.db.arn
-  }
-}
 
 resource "aws_alb_listener_rule" "db" {
-  listener_arn = aws_alb_listener.db.arn
-  priority     = 50
+  listener_arn = aws_alb_listener.web.arn
+  priority     = 99
 
   action {
     type             = "forward"
