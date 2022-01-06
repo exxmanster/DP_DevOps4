@@ -10,7 +10,8 @@ resource "aws_instance" "web1" {
 
   tags = {
     Name = "Web 1"
-    env  = "web"
+    env  = "edu"
+    type = "web"
    }
 }
 resource "aws_instance" "web2" {
@@ -23,7 +24,8 @@ resource "aws_instance" "web2" {
   user_data = file("nginx-userdata.sh")
   tags = {
     Name = "Web 2"
-    env  = "web"
+    env  = "edu"
+    type = "web"
 
    }
 }
@@ -38,7 +40,8 @@ resource "aws_instance" "db1" {
   user_data = file("nginx-db-userdata.sh")
   tags = {
     Name = "db1"
-    env  = "db"
+    env  = "edu"
+    type = "web"
 
    }
 }
@@ -53,7 +56,8 @@ resource "aws_instance" "db2" {
   user_data = file("nginx-db-userdata.sh")
   tags = {
     Name = "db2"
-    env  = "db"
+    env  = "edu"
+    type = "db"
 
    }
 }
@@ -83,7 +87,8 @@ resource "aws_instance" "bastion" {
 provisioner "remote-exec" {    
   inline = [
     "sudo chmod 600 /home/ec2-user/.ssh/id_rsa",
-    "sudo yum update -y && sudo yum install -y python3-pip && pip3 install ansible boto3"
+    "sudo yum update -y && sudo yum install -y python3-pip && pip3 install ansible boto3",
+    "sudo yum install git && git clone https://github.com/exxmanster/DP_DevOps4.git "
   ]
 }
   tags = {

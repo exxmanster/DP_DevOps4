@@ -27,7 +27,7 @@ resource "aws_key_pair" "ssh-key-from-bastion" {
 
   output "bastion_pub_ip" {  
   description = "Bastion Public IP"  
-  value       = "${aws_instance.bastion.public_ip}"
+  value       = "ssh ec2-user@${aws_instance.bastion.public_ip}"
   }
 
   output "web_ips" {

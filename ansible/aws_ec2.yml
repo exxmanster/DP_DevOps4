@@ -2,7 +2,7 @@ plugin: aws_ec2
 regions:
   - eu-central-1
 filters:
-  tag:env:
+  tag:type:
     - web 
     - db 
 compose:
@@ -10,3 +10,5 @@ compose:
 keyed_groups:
   - prefix: env
     key: tags['env']
+  - prefix: type
+    key: tags['type']
