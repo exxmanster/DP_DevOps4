@@ -1,10 +1,10 @@
 resource "aws_alb" "main" {
-  name = "MainELBv2"
+  name               = "MainELBv2"
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb_sg.id]
-  subnets            = [aws_subnet.public1.id,aws_subnet.public2.id]
- 
+  subnets            = [aws_subnet.public1.id, aws_subnet.public2.id]
+
   tags = {
     Name = "Main elb"
   }
@@ -15,23 +15,23 @@ resource "aws_alb_target_group" "web" {
   port     = 80
   protocol = "HTTP"
   vpc_id   = aws_vpc.main.id
-  tags ={
-      Name = "Web TG"
+  tags = {
+    Name = "Web TG"
   }
 }
 
 resource "aws_alb_target_group" "db" {
-  name = "DbTargetGroup"
+  name     = "DbTargetGroup"
   port     = 80
   protocol = "HTTP"
   vpc_id   = aws_vpc.main.id
   tags = {
-      Name = "DB TG"
+    Name = "DB TG"
   }
 }
 
 resource "aws_alb_target_group_attachment" "web1" {
-  
+
   target_group_arn = aws_alb_target_group.web.arn
   target_id        = aws_instance.web1.id
   port             = 80
@@ -58,7 +58,7 @@ resource "aws_alb_listener" "web" {
   load_balancer_arn = aws_alb.main.arn
   port              = "80"
   protocol          = "HTTP"
-  
+
   default_action {
     type             = "forward"
     target_group_arn = aws_alb_target_group.web.arn
