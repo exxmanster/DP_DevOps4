@@ -1,0 +1,6 @@
+FROM alpine:latest
+
+# Install nginx and remove cache  
+RUN apk add --update nginx  && rm -rf /var/cache/apk/* 
+CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 80
