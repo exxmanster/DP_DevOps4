@@ -1,7 +1,7 @@
-# output "bastion_pub_ip" {
-#   description = "Bastion Public IP"
-#   value       = "ssh ec2-user@${aws_instance.bastion.public_ip}"
-# }
+output "bastion_pub_ip" {
+  description = "Bastion Public IP"
+  value       = "ssh ec2-user@${aws_instance.bastion.public_ip}"
+}
 
 # output "web_ips" {
 #   description = "Web IP's"
