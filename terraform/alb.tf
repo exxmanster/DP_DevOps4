@@ -33,26 +33,26 @@ resource "aws_alb_target_group" "db" {
 resource "aws_alb_target_group_attachment" "web1" {
 
   target_group_arn = aws_alb_target_group.web.arn
-  target_id        = aws_instance.web1.id
+  target_id        = module.ec2-web1.instance[0]
   port             = 80
 }
 resource "aws_alb_target_group_attachment" "web2" {
   target_group_arn = aws_alb_target_group.web.arn
-  target_id        = aws_instance.web2.id
+  target_id        = module.ec2-web2.instance[0]
   port             = 80
 }
 
 resource "aws_alb_target_group_attachment" "db1" {
   target_group_arn = aws_alb_target_group.db.arn
-  target_id        = aws_instance.db1.id
+  target_id        = module.ec2-db1.instance[0]
   port             = 80
 }
 
-resource "aws_alb_target_group_attachment" "db2" {
-  target_group_arn = aws_alb_target_group.db.arn
-  target_id        = aws_instance.db2.id
-  port             = 80
-}
+# resource "aws_alb_target_group_attachment" "db2" {
+#   target_group_arn = aws_alb_target_group.db.arn
+#   target_id        = module.ec2-db2.instance[0]
+#   port             = 80
+# }
 
 resource "aws_alb_listener" "web" {
   load_balancer_arn = aws_alb.main.arn

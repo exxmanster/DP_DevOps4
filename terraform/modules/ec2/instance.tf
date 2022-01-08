@@ -3,13 +3,13 @@ resource "aws_instance" "DP4" {
   ami           = "${var.ami_id}"
   instance_type = "${var.instance_type}"
   subnet_id     = "${var.subnet_id}"
-  vpc_security_group_ids = "${var.vpc_security_group_ids_instance}"
-  iam_instance_profile   = "${var.iam_instance_profile}"
+  vpc_security_group_ids = var.sg_ids
+  iam_instance_profile   = "${var.iam_instance_prfile}"
   key_name               = "${var.key_name}"
 
 
 
-  tags {
+  tags = {
     Name = "${var.tag_name}"
     env  = "${var.tag_env}"
     type = "${var.tag_type}"

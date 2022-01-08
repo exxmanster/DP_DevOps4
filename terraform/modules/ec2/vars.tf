@@ -8,15 +8,11 @@ variable "instance_type" {
   default = "t2.micro"
 }
 variable "subnet_id" {}
-variable "vpc_security_group_ids_instance"{
-  default = "[aws_security_group.allow_http.id, aws_security_group.allow_ssh.id]"
+variable "sg_ids"{}
+variable "iam_instance_prfile"{
+  default = "SSMRole"
 }
-variable "iam_prfile"{
-  default = "SMMRole"
-}
-variable "key_name"{
- default = "aws_key_pair.ssh-key-from-bastion.key_name"
-}
+variable "key_name"{}
 variable "tag_name" {}
 variable "tag_env" {
   default = "edu"
