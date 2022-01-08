@@ -1,0 +1,5 @@
+phpmyadmin_group: type_db
+roles:
+  - nginx
+  - php
+  - phpmyadmin

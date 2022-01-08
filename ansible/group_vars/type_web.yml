@@ -1,0 +1,4 @@
+nginx_php: type_web
+roles:
+  - nginx
+  - php

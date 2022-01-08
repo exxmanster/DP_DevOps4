@@ -14,10 +14,6 @@
       update_cache: yes
       state: latest
 
-  - name: Replace Index.html
-    host: env_web
-    ansible.builtin.shell: echo "<h1>It's Alive and running from $(hostname -f)<h/1>" > /usr/share/nginx/html/index.html
-
     # copy: 
     #    content: "<h1>It's Alive and running from $(hostname -f)<h/1>"
     #    dest: /usr/share/nginx/html/index.html
