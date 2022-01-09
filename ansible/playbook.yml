@@ -15,7 +15,7 @@
       state: latest
 
   # - name: Replace Index.html
-  #   host: env_web
+  #   host: type_web
   #   ansible.builtin.shell: echo "<h1>It's Alive and running from $(hostname -f)<h/1>" > /usr/share/nginx/html/index.html
 
     # copy: 
@@ -46,7 +46,7 @@
 
 
 - name: Install mariadb and phpmyadmin
-  hosts: tyoe_db
+  hosts: type_db
   become: yes
 
   tasks:
