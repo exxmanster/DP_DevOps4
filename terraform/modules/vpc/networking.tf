@@ -1,6 +1,6 @@
 resource "aws_vpc" "main" {
   cidr_block       = "${var.vpc_cidr}"
-  tags {
+  tags = {
     Name = "main"
   }
 }
@@ -39,10 +39,15 @@ resource "aws_nat_gateway" "gw-NAT-1b" {
   }
 }
 
+data "aws_availability_zones" "available" {
+  state = "available"
+}
+
+
 resource "aws_subnet" "private1" {
   vpc_id            = aws_vpc.main.id
-  cidr_block        = "10.0.1.0/24"
-  availability_zone = "eu-central-1a"
+  cidr_block        = "${var.private_subnet1_cidr}"
+  availability_zone = data.aws_availability_zones.available.names[0]
   tags = {
     Name = "privat1"
   }
@@ -50,8 +55,8 @@ resource "aws_subnet" "private1" {
 
 resource "aws_subnet" "private2" {
   vpc_id            = aws_vpc.main.id
-  cidr_block        = "10.0.2.0/24"
-  availability_zone = "eu-central-1b"
+  cidr_block        = "${var.private_subnet2_cidr}"
+  availability_zone = data.aws_availability_zones.available.names[1]
   tags = {
     Name = "privat2"
 
@@ -61,8 +66,9 @@ resource "aws_subnet" "private2" {
 
 resource "aws_subnet" "public1" {
   vpc_id            = aws_vpc.main.id
-  cidr_block        = "10.0.100.0/24"
-  availability_zone = "eu-central-1a"
+  cidr_block        = "${var.public_subnet1_cidr}"
+  availability_zone = data.aws_availability_zones.available.names[0]
+  map_public_ip_on_launch = true
   tags = {
     Name = "public1"
 
@@ -71,8 +77,8 @@ resource "aws_subnet" "public1" {
 
 resource "aws_subnet" "public2" {
   vpc_id            = aws_vpc.main.id
-  cidr_block        = "10.0.200.0/24"
-  availability_zone = "eu-central-1b"
+  cidr_block        = "${var.public_subnet2_cidr}"
+  availability_zone = data.aws_availability_zones.available.names[1]
   tags = {
     Name = "public2"
 
