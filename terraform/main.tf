@@ -3,13 +3,16 @@ terraform {
     aws = {
       source  = "hashicorp/aws"
       version = "~> 3.0"
-    }
+     }
+
+    
   }
 }
 
 provider "aws" {
   region = "eu-central-1"
 }
+
 resource "aws_key_pair" "ssh-key-to-bastion" {
   key_name   = "to-bastion-key"
   public_key = file("id_rsa.pub")

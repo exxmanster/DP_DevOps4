@@ -30,3 +30,5 @@ override.tf.json
 id_rsa.pub
 .terraform.lock.hcl
 bastion_id*
+/docker/secrets/*
+/docker/config/*
