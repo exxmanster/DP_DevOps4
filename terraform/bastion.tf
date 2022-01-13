@@ -27,7 +27,7 @@ sudo yum install -y git && git clone https://github.com/exxmanster/DP_DevOps4.gi
     user = "ec2-user"
     host = aws_instance.bastion.public_ip
 
-  # }
+  }
 
   # provisioner "remote-exec" {
   #   inline = [
