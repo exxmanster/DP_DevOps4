@@ -71,11 +71,12 @@ pipeline {
     }
 
         stage('Parsing Bastion IP') {
+            steps {
             sh "BASTION_PUB_IP=\$(terraform output -json | jq -r .bastion_pub_ip.value)"
             sh "echo ${BASTION_PUB_IP}"
 
         }
-
+    } 
 
     
 
