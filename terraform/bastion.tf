@@ -16,18 +16,18 @@ sudo yum install -y git && git clone https://github.com/exxmanster/DP_DevOps4.gi
 	
 
 
-  provisioner "file" {
-    source      = "bastion_id"
-    destination = "/home/ec2-user/.ssh/id_rsa"
+  # provisioner "file" {
+  #   source      = "bastion_id"
+  #   destination = "/home/ec2-user/.ssh/id_rsa"
 
-  }
+  # }
 
-  connection {
-    type = "ssh"
-    user = "ec2-user"
-    host = aws_instance.bastion.public_ip
+  # connection {
+  #   type = "ssh"
+  #   user = "ec2-user"
+  #   host = aws_instance.bastion.public_ip
 
-  }
+  # }
 
   # provisioner "remote-exec" {
   #   inline = [
