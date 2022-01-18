@@ -10,7 +10,7 @@ resource "aws_instance" "bastion" {
 sudo chmod 600 /home/ec2-user/.ssh/id_rsa
 sudo yum update -y && sudo yum install -y python3-pip && pip3 install ansible boto3
 sudo ansible-galaxy collection install amazon.aws
-sudo yum install -y git && git clone https://github.com/exxmanster/spark.git
+sudo yum install -y git && git clone https://github.com/exxmanster/spark.git && chmod -R a+x /spark
 
   EOF
 	
