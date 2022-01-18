@@ -1,0 +1,38 @@
+pipeline {
+    agent any
+    
+    environment {
+        PROJECT_NAME = 'test'
+    }
+
+    stages {
+        stage('1-Build') {
+            steps {
+                echo 'Start of Stage Build'
+                echo 'Building...'
+                sh 'ls -la'
+                git branch: 'edu', url: 'https://github.com/exxmanster/DP_DevOps4.git'
+                echo 'End of Stage Build'
+            }
+        }
+        stage('2-Test') {
+            steps {
+                echo 'Start of Stage Test'
+                echo 'Testing...'
+                sh '''
+                    echo 'Line1'
+                    echo 'Line2'
+                '''
+                echo "Project Name is ${PROJECT_NAME}"
+                echo 'End of Stage Test'
+            }
+        }
+        stage('3-Deploy') {
+            steps {
+                echo 'Start of Stage Deploy'
+                echo 'Deploying...'
+                echo 'End of Stage Deploy'
+            }
+        }
+    }
+}
