@@ -1,0 +1,23 @@
+plugin: aws_ec2
+regions:
+  - eu-central-1
+  - us-east-1
+  - us-west-1
+  - us-east-2
+  - eu-west-2
+filters:
+  tag:type:
+    - web
+    - php
+    - db 
+compose:
+  ansible_host: private_ip_address
+keyed_groups:
+  - prefix: name
+    key: tags['name'] 
+  - prefix: env
+    key: tags['env']
+  - prefix: type
+    key: tags['type']
+  - prefix: project
+    key: tags['project']   

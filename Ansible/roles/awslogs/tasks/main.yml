@@ -1,0 +1,30 @@
+---
+# tasks file for awslogs
+- name: Install CWAgent
+  yum:
+    name: awslogs
+    state: present
+
+- name: starting awslogs service
+  service:
+    name: awslogsd
+    state: started
+    enabled: yes
+
+- name: Configure AWS CloudWatch Logs Agent Region
+  template:
+    src: awscli.j2
+    dest: /etc/awslogs/awscli.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Configure AWS CloudWatch Logs Agent
+  template:
+    src: awslogs.conf.j2
+    dest: /etc/awslogs/awslogs.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - Restart awslogs

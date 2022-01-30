@@ -1,0 +1,6 @@
+nginx_php_fpm_awslogs_group: type_web
+roles:
+  - nginx
+  - php-fpm
+  - phpmyadmin
+  - awslogs

@@ -1,0 +1,13 @@
+---
+- name: Provisioning 
+  hosts: all
+  gather_facts: true
+  become: yes
+  tasks:
+    - name: Provision projects role
+      include_role:
+        name: "{{ role }}"
+      with_items: "{{ roles }}"
+      loop_control:
+        loop_var: role
+      when: ('aws_ec2' in group_names)

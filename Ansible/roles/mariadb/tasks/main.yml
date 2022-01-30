@@ -1,0 +1,52 @@
+---
+
+- name: Install mariadb
+  yum:
+    name:
+      - mariadb
+      - mariadb-server
+      - MySQL-python
+    state: latest
+
+- name: Start mariadb
+  service:
+    name: mariadb
+    enabled: true
+    state: started
+
+- name: Creating my.cnf
+  template:
+    src: templates/mycnf.j2
+    dest: /root/.my.cnf
+    mode: 0600
+    owner: root
+    group: root
+  notify: Restart mariadb
+
+- name: Change root password
+  mysql_user:
+    name: root
+    password: "{{ db_root_pass }}"
+    host_all: yes
+    host: localhost
+    login_unix_socket: /var/lib/mysql/mysql.sock
+    priv: '*.*:ALL,GRANT'
+    check_implicit_admin: true 
+    state: present
+  notify: Restart mariadb
+
+- name: Remove anon users
+  mysql_user:
+    name: ''
+    host_all: yes
+  notify: Restart mariadb
+
+- name: Create DB user
+  mysql_user:
+    name: admin
+    password: "{{ db_user_pass }}"
+    priv: '*.*:ALL'
+    host: '%'
+    state: present
+  notify:
+    - Restart mariadb

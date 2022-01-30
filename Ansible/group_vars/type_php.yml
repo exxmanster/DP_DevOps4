@@ -1,0 +1,6 @@
+phpmyadmin_group: type_php
+roles:
+  - nginx
+  - php-fpm
+  - awslogs
+  - phpmyadmin
