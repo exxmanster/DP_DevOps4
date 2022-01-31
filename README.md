@@ -28,8 +28,6 @@ All regin sensetive information will be grubed automaticly on a terraform side.
 
 ### Terra
 
-
-
 ###### ## Requirements
 
 | Name                                  | Version |
@@ -123,8 +121,6 @@ Playbook example
 ```
 
 > 'group_tag' - env tag dynamic inventory
-
-
 
 ## Cloudflare
 
